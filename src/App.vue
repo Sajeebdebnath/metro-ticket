@@ -1,7 +1,10 @@
 <script setup>
 import { ref, computed } from "vue";
-import { stations, fareMatrix } from "./data/mrt";
-import { convertToBengaliNum } from "./composables/convert";
+import { stations, fareMatrix } from "@/data/mrt";
+import { convertToBengaliNum } from "@/composables/convert";
+import logo from "@/assets/images/logo.png";
+import heroBg from "@/assets/images/hero-bg.jpg";
+import ticketBg from "@/assets/images/ticketbox-bg.jpg";
 
 const origin = ref("");
 const destination = ref("");
@@ -40,31 +43,79 @@ const updatedTicketFee = computed(() => {
 </script>
 
 <template>
-  <div class="metro-ticket">
-    <div class="check-pass-user">
-      <label for="">এমআরটি / রেপিড পাস আছে ?</label>
-      <input type="checkbox" name="passUser" v-model="passUser" />
+  <header class="header-area">
+    <div class="container">
+      <div class="header-logo">
+        <a href=""><img :src="logo" alt="Mictro Ticket" width="100" /></a>
+      </div>
     </div>
-    <label for="origin">মূল স্টেশন :</label>
-    <select v-model="origin" @change="calculateTicketFee">
-      <option value="" disabled>মূল স্টেশন নির্বাচন করুন</option>
-      <option v-for="station in filteredOrigins" :key="station">
-        {{ station }}
-      </option>
-    </select>
-
-    <label for="destination">গন্তব্য স্টেশন :</label>
-    <select v-model="destination" @change="calculateTicketFee">
-      <option value="" disabled>গন্তব্য স্টেশন নির্বাচন করুন</option>
-      <option v-for="station in filteredDestinations" :key="station">
-        {{ station }}
-      </option>
-    </select>
-
-    <div v-if="updatedTicketFee !== null">
-      ভাড়া : {{ convertToBengaliNum(updatedTicketFee) }} টাকা মাত্র
+  </header>
+  <section>
+    <div
+      class="hero-area"
+      :style="{ 'background-image': 'url(' + heroBg + ')' }"
+    >
+      <div class="container h-100">
+        <div class="row algin-center h-100">
+          <div class="col-xs-12 col-sm-7">
+            <div class="hero-banner-info">
+              <h3 class="subtitle">ঢাকা মেট্রোরেল</h3>
+              <h2 class="title">
+                MRT <span><b>Line</b> <b>6</b></span>
+              </h2>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-5">
+            <div
+              class="metro-ticket-form"
+              :style="{ 'background-image': 'url(' + ticketBg + ')' }"
+            >
+              <form name="form">
+                <div class="form-group">
+                  <label for="">এমআরটি / রেপিড পাস আছে ?</label> -
+                  <input type="checkbox" name="passUser" v-model="passUser" />
+                </div>
+                <div class="form-group">
+                  <label for="origin">মূল স্টেশন :</label>
+                  <select
+                    class="form-control"
+                    v-model="origin"
+                    @change="calculateTicketFee"
+                  >
+                    <option value="" disabled>মূল স্টেশন নির্বাচন করুন</option>
+                    <option v-for="station in filteredOrigins" :key="station">
+                      {{ station }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="destination">গন্তব্য স্টেশন :</label>
+                  <select
+                    class="form-control"
+                    v-model="destination"
+                    @change="calculateTicketFee"
+                  >
+                    <option value="" disabled>
+                      গন্তব্য স্টেশন নির্বাচন করুন
+                    </option>
+                    <option
+                      v-for="station in filteredDestinations"
+                      :key="station"
+                    >
+                      {{ station }}
+                    </option>
+                  </select>
+                </div>
+                <div class="ticket-info" v-if="updatedTicketFee !== null">
+                  ভাড়া : {{ convertToBengaliNum(updatedTicketFee) }} টাকা মাত্র
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped></style>
