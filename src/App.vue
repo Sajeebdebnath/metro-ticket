@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { stations, fareMatrix } from "./data/mrt";
+import { convertToBengaliNum } from "./composables/convert";
 
 const origin = ref("");
 const destination = ref("");
@@ -39,27 +40,29 @@ const updatedTicketFee = computed(() => {
 </script>
 
 <template>
-  <div>
+  <div class="metro-ticket">
     <div class="check-pass-user">
-      <label for="">If Have MRT/Rapid Pass ?</label>
+      <label for="">এমআরটি / রেপিড পাস আছে ?</label>
       <input type="checkbox" name="passUser" v-model="passUser" />
     </div>
-    <label for="origin">Origin:</label>
+    <label for="origin">মূল স্টেশন :</label>
     <select v-model="origin" @change="calculateTicketFee">
+      <option value="" disabled>মূল স্টেশন নির্বাচন করুন</option>
       <option v-for="station in filteredOrigins" :key="station">
         {{ station }}
       </option>
     </select>
 
-    <label for="destination">Destination:</label>
+    <label for="destination">গন্তব্য স্টেশন :</label>
     <select v-model="destination" @change="calculateTicketFee">
+      <option value="" disabled>গন্তব্য স্টেশন নির্বাচন করুন</option>
       <option v-for="station in filteredDestinations" :key="station">
         {{ station }}
       </option>
     </select>
 
     <div v-if="updatedTicketFee !== null">
-      Ticket Fee: ${{ updatedTicketFee }}
+      ভাড়া : {{ convertToBengaliNum(updatedTicketFee) }} টাকা মাত্র
     </div>
   </div>
 </template>
