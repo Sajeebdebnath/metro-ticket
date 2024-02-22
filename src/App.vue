@@ -57,7 +57,7 @@ const updatedTicketFee = computed(() => {
     >
       <div class="container h-100">
         <div class="row algin-center h-100">
-          <div class="col-xs-12 col-sm-7">
+          <div class="col-lg-7 col-md-5">
             <div class="hero-banner-info">
               <h3 class="subtitle">ঢাকা মেট্রোরেল</h3>
               <h2 class="title">
@@ -65,7 +65,7 @@ const updatedTicketFee = computed(() => {
               </h2>
             </div>
           </div>
-          <div class="col-xs-12 col-sm-5">
+          <div class="col-lg-5 col-md-7">
             <div
               class="metro-ticket-form"
               :style="{ 'background-image': 'url(' + ticketBg + ')' }"
