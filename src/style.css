@@ -85,3 +85,9 @@
 .hero-banner-info .title b:nth-child(2) {
   color: #00acee;
 }
+
+@media only screen and (max-width: 767.98px) {
+  .hero-banner-info {
+    margin-top: 90px;
+  }
+}
