@@ -2,9 +2,10 @@
 import { ref, computed } from "vue";
 import { stations, fareMatrix } from "@/data/mrt";
 import { convertToBengaliNum } from "@/composables/convert";
-import logo from "@/assets/images/logo.png";
+import logo from "@/assets/images/metro-jatra.png";
 import heroBg from "@/assets/images/hero-bg.jpg";
 import ticketBg from "@/assets/images/ticketbox-bg.jpg";
+import MapSection from "./components/MapSection.vue";
 
 const origin = ref("");
 const destination = ref("");
@@ -46,7 +47,7 @@ const updatedTicketFee = computed(() => {
   <header class="header-area">
     <div class="container">
       <div class="header-logo">
-        <a href=""><img :src="logo" alt="Mictro Ticket" width="100" /></a>
+        <a href=""><img :src="logo" alt="Mictro Ticket" width="120" /></a>
       </div>
     </div>
   </header>
@@ -116,6 +117,7 @@ const updatedTicketFee = computed(() => {
       </div>
     </div>
   </section>
+  <MapSection />
 </template>
 
 <style scoped></style>
